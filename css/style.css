@@ -1,0 +1,911 @@
+/* ================================================
+   БИБЛИОТЕКА - ОСНОВНЫЕ СТИЛИ
+   ================================================ */
+
+/* ===== ПЕРЕМЕННЫЕ ===== */
+:root {
+    /* Цвета */
+    --color-primary: #7C3AED;
+    --color-primary-dark: #6D28D9;
+    --color-success: #10B981;
+    --color-danger: #EF4444;
+    --color-warning: #F59E0B;
+    --color-gray: #9CA3AF;
+    --color-gray-light: #E5E7EB;
+    --color-gray-dark: #374151;
+
+    /* Текст */
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --text-light: #9CA3AF;
+
+    /* Фон */
+    --bg-white: #FFFFFF;
+    --bg-light: #F9FAFB;
+    --bg-gray: #F3F4F6;
+
+    /* Границы */
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+    --border-color: #E5E7EB;
+
+    /* Тени */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+    /* Размеры */
+    --container-width: 1200px;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+}
+
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background-color: var(--bg-light);
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* ===== ТИПОГРАФИКА ===== */
+h1 { font-size: 24px; font-weight: 700; }
+h2 { font-size: 20px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+h4 { font-size: 16px; font-weight: 600; }
+p { margin-bottom: var(--spacing-md); }
+
+/* ===== ШАПКА САЙТА ===== */
+.site-header {
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--spacing-md) 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.logo .subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.user-avatar {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.avatar-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+.avatar-circle.reader {
+    background: var(--color-primary);
+}
+
+.avatar-circle.admin {
+    background: var(--color-gray-dark);
+}
+
+.user-name {
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.btn-logout {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    transition: background 0.2s;
+}
+
+.btn-logout:hover {
+    background: var(--bg-gray);
+}
+
+.notification-badge .badge {
+    font-size: 12px;
+}
+
+/* ===== НАВИГАЦИЯ ===== */
+.main-nav {
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.nav-menu li a {
+    display: block;
+    padding: var(--spacing-md);
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-menu li.active a {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.nav-menu li a:hover {
+    color: var(--color-primary);
+}
+
+/* ===== ГЛАВНЫЙ КОНТЕНТ ===== */
+.main-content {
+    padding: var(--spacing-xl) 0;
+    min-height: calc(100vh - 250px);
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.page-header h2 {
+    margin: 0;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* ===== КНОПКИ ===== */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--color-primary-dark);
+}
+
+.btn-secondary {
+    background: var(--bg-gray);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--color-gray-light);
+}
+
+.btn-success {
+    background: var(--color-success);
+    color: white;
+}
+
+.btn-danger {
+    background: var(--color-danger);
+    color: white;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-block {
+    width: 100%;
+    display: block;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    transition: background 0.2s;
+}
+
+.btn-icon:hover {
+    background: var(--bg-gray);
+}
+
+/* ===== BADGES ===== */
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-success {
+    background: var(--color-success);
+    color: white;
+}
+
+.badge-danger {
+    background: var(--color-danger);
+    color: white;
+}
+
+.badge-warning {
+    background: var(--color-warning);
+    color: white;
+}
+
+.badge-gray {
+    background: var(--color-gray);
+    color: white;
+}
+
+/* ===== ФОРМЫ ===== */
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.form-group small {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+}
+
+/* ===== ALERT/FLASH СООБЩЕНИЯ ===== */
+.alert {
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-md);
+}
+
+.alert-success {
+    background: #D1FAE5;
+    color: #065F46;
+    border-left: 4px solid var(--color-success);
+}
+
+.alert-error {
+    background: #FEE2E2;
+    color: #991B1B;
+    border-left: 4px solid var(--color-danger);
+}
+
+.alert ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.flash-message {
+    background: var(--color-primary);
+    color: white;
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-lg);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ===== СЕТКА КНИГ ===== */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.book-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.book-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.book-cover {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.book-cover-placeholder {
+    font-size: 48px;
+}
+
+.book-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.book-author {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.book-genre {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-sm);
+}
+
+.book-status {
+    margin-top: var(--spacing-sm);
+}
+
+/* ===== БЫСТРЫЙ ПОИСК ===== */
+.quick-search {
+    margin-bottom: var(--spacing-lg);
+}
+
+.search-form {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 14px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+/* ===== РАСШИРЕННЫЙ ПОИСК ===== */
+.search-container {
+    max-width: 600px;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.search-advanced-form {
+    background: var(--bg-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+}
+
+/* ===== МОИ КНИГИ ===== */
+.my-books-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.my-book-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.my-book-card.overdue {
+    border-color: var(--color-danger);
+    border-width: 2px;
+}
+
+.book-icon {
+    font-size: 48px;
+}
+
+.book-details {
+    flex: 1;
+}
+
+.loan-dates {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-sm) 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.loan-status {
+    margin-top: var(--spacing-sm);
+}
+
+/* ===== СТАТИСТИКА ===== */
+.statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.stat-card {
+    background: var(--bg-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: var(--spacing-xs);
+}
+
+/* ===== УПРАВЛЕНИЕ ЧИТАТЕЛЯМИ ===== */
+.readers-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.reader-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+}
+
+.reader-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.reader-info {
+    flex: 1;
+}
+
+.reader-info h4 {
+    margin: 0 0 var(--spacing-xs);
+}
+
+.reader-ticket {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.active-books-section {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+.active-books-section h5 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-sm);
+}
+
+.active-book-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm);
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-sm);
+}
+
+.active-book-item.overdue {
+    background: #FEE2E2;
+}
+
+.book-info-compact {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.loan-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.no-books {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* ===== ЗАЯВКИ ===== */
+.requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.request-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.request-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+/* ===== МОДАЛЬНЫЕ ОКНА ===== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--bg-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-close {
+    position: absolute;
+    right: var(--spacing-md);
+    top: var(--spacing-md);
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+.modal-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+.book-modal-info {
+    background: var(--bg-light);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.book-icon-large {
+    font-size: 40px;
+}
+
+.books-grid-small {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-sm);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* ===== АВТОРИЗАЦИЯ ===== */
+.auth-page {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #5B21B6 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    padding: var(--spacing-md);
+}
+
+.auth-card {
+    background: var(--bg-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.auth-logo {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.auth-logo h1 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    font-size: 14px;
+}
+
+.auth-footer a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.auth-hint {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+    font-size: 12px;
+}
+
+.auth-hint summary {
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+}
+
+.info-box {
+    background: #EFF6FF;
+    border-left: 4px solid #3B82F6;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--border-radius);
+    font-size: 14px;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--bg-white);
+    border-top: 1px solid var(--border-color);
+    padding: var(--spacing-lg) 0;
+    margin-top: var(--spacing-xl);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* ===== УТИЛИТЫ ===== */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+}
+
+.text-danger {
+    color: var(--color-danger);
+}
+
+.section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 768px) {
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+    }
+
+    .nav-menu li a {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 14px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: var(--spacing-lg);
+    }
+
+    .my-book-card {
+        flex-direction: column;
+    }
+
+    .loan-dates {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .reader-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .statistics-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .books-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .statistics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .books-grid-small {
+        grid-template-columns: 1fr;
+    }
+}
