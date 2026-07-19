@@ -54,8 +54,8 @@
 | ![Карточка книги](docs/screenshots/book-card.png) | ![Мои книги](docs/screenshots/my-books.png) |
 | Заявки читателя | Админ-панель |
 | ![Мои заявки](docs/screenshots/booking.png) | ![Управление заявками](docs/screenshots/admin-panel.png) |
-| Управление книгами | |
-| ![Добавление книги администратором](docs/screenshots/manage-books.png) | |
+| Управление книгами | Регистрация |
+| ![Добавление книги администратором](docs/screenshots/manage-books.png) | ![Регистрация читателя](docs/screenshots/register.png) |
 
 ## Project status
 
