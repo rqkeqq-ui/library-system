@@ -113,7 +113,7 @@ include 'includes/header.php';
                         <p class="reader-ticket">Билет №<?= escape($reader['ticket_number']) ?></p>
                     </div>
                     <?php if (empty($reader['active_loans'])): ?>
-                        <button class="btn btn-sm btn-primary" onclick="openIssueModal(<?= $reader['id'] ?>, '<?= escape($reader['full_name']) ?>')">
+                        <button class="btn btn-sm btn-primary" onclick='openIssueModal(<?= (int) $reader['id'] ?>, <?= escape(json_encode($reader['full_name'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT)) ?>)'>
                             📋 Выдать
                         </button>
                     <?php endif; ?>
@@ -140,13 +140,13 @@ include 'includes/header.php';
                                 <div class="loan-actions">
                                     <button
                                         class="btn-icon"
-                                        onclick="openExtendModal(<?= $loan['id'] ?>, <?= $loan['book_id'] ?>, '<?= escape($loan['title']) ?>', '<?= escape($reader['full_name']) ?>')"
+                                        onclick='openExtendModal(<?= (int) $loan['id'] ?>, <?= (int) $loan['book_id'] ?>, <?= escape(json_encode($loan['title'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT)) ?>, <?= escape(json_encode($reader['full_name'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT)) ?>)'
                                         title="Продлить">
                                         ⏰
                                     </button>
                                     <button
                                         class="btn-icon btn-success"
-                                        onclick="openReturnModal(<?= $loan['id'] ?>, <?= $loan['book_id'] ?>, '<?= escape($loan['title']) ?>', '<?= escape($reader['full_name']) ?>')"
+                                        onclick='openReturnModal(<?= (int) $loan['id'] ?>, <?= (int) $loan['book_id'] ?>, <?= escape(json_encode($loan['title'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT)) ?>, <?= escape(json_encode($reader['full_name'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT)) ?>)'
                                         title="Принять">
                                         ✓
                                     </button>
@@ -165,6 +165,6 @@ include 'includes/header.php';
 <!-- Модальные окна -->
 <?php include 'includes/management-modals.php'; ?>
 
-<script src="js/management.js"></script>
+<script src="js/management.js?v=20260719"></script>
 
 <?php include 'includes/footer.php'; ?>

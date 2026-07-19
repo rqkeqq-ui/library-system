@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+requireCsrfToken();
+
 $loanId = intval($_POST['loan_id'] ?? 0);
 $bookId = intval($_POST['book_id'] ?? 0);
 

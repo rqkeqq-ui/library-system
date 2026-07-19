@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+requireCsrfToken();
+
 $requestId = intval($_POST['request_id'] ?? 0);
 $action = $_POST['action'] ?? ''; // approve или reject
 

@@ -20,7 +20,9 @@ class Database {
 
             $this->connection = new PDO($dsn, DB_USER, DB_PASS, $options);
         } catch (PDOException $e) {
-            die("Ошибка подключения к базе данных: " . $e->getMessage());
+            error_log('Database connection error: ' . $e->getMessage());
+            http_response_code(500);
+            exit('Сервис временно недоступен. Попробуйте обновить страницу позже.');
         }
     }
 

@@ -15,7 +15,7 @@ async function openIssueModal(readerId, readerName) {
         if (data.success) {
             const grid = document.getElementById('availableBooksGrid');
             grid.innerHTML = data.books.map(book => `
-                <div class="book-card" onclick="issueBookToReader(${readerId}, ${book.id})">
+                <button type="button" class="book-card" onclick="issueBookToReader(${readerId}, ${book.id})" aria-label="Выдать книгу ${escapeHtml(book.title)}">
                     <div class="book-cover">
                         <div class="book-cover-placeholder">📕</div>
                     </div>
@@ -24,7 +24,7 @@ async function openIssueModal(readerId, readerName) {
                         <p class="book-author" style="font-size: 12px;">${escapeHtml(book.author)}</p>
                         <p class="book-genre" style="font-size: 11px;">${escapeHtml(book.genre)}</p>
                     </div>
-                </div>
+                </button>
             `).join('');
 
             if (data.books.length === 0) {
@@ -45,10 +45,13 @@ async function issueBookToReader(readerId, bookId) {
         const formData = new FormData();
         formData.append('reader_id', readerId);
         formData.append('book_id', bookId);
+        appendCsrfToken(formData);
 
         const response = await fetch('api/issue-book.php', {
             method: 'POST',
-            body: formData
+            headers: csrfHeaders(),
+            body: formData,
+            credentials: 'same-origin'
         });
 
         const data = await response.json();
@@ -88,11 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData();
             formData.append('loan_id', loanId);
             formData.append('days', days);
+            appendCsrfToken(formData);
 
             try {
                 const response = await fetch('api/extend-loan.php', {
                     method: 'POST',
-                    body: formData
+                    headers: csrfHeaders(),
+                    body: formData,
+                    credentials: 'same-origin'
                 });
 
                 const data = await response.json();
@@ -135,11 +141,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData();
             formData.append('loan_id', loanId);
             formData.append('book_id', bookId);
+            appendCsrfToken(formData);
 
             try {
                 const response = await fetch('api/return-book.php', {
                     method: 'POST',
-                    body: formData
+                    headers: csrfHeaders(),
+                    body: formData,
+                    credentials: 'same-origin'
                 });
 
                 const data = await response.json();
@@ -169,10 +178,13 @@ async function approveRequest(requestId, readerId, bookId) {
         const formData = new FormData();
         formData.append('request_id', requestId);
         formData.append('action', 'approve');
+        appendCsrfToken(formData);
 
         const response = await fetch('api/manage-request.php', {
             method: 'POST',
-            body: formData
+            headers: csrfHeaders(),
+            body: formData,
+            credentials: 'same-origin'
         });
 
         const data = await response.json();
@@ -199,10 +211,13 @@ async function rejectRequest(requestId) {
         const formData = new FormData();
         formData.append('request_id', requestId);
         formData.append('action', 'reject');
+        appendCsrfToken(formData);
 
         const response = await fetch('api/manage-request.php', {
             method: 'POST',
-            body: formData
+            headers: csrfHeaders(),
+            body: formData,
+            credentials: 'same-origin'
         });
 
         const data = await response.json();

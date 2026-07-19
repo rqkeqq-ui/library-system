@@ -55,6 +55,39 @@ function redirect($url) {
 }
 
 /**
+ * Получить или создать токен защиты от CSRF-атак.
+ */
+function csrfToken() {
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    return $_SESSION['csrf_token'];
+}
+
+/**
+ * Проверить CSRF-токен, переданный формой или API-запросом.
+ */
+function isCsrfTokenValid($token) {
+    return is_string($token)
+        && isset($_SESSION['csrf_token'])
+        && hash_equals($_SESSION['csrf_token'], $token);
+}
+
+/**
+ * Завершить API-запрос с понятной ошибкой, если CSRF-токен неверный.
+ */
+function requireCsrfToken() {
+    $token = $_POST['csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? null;
+
+    if (!isCsrfTokenValid($token)) {
+        http_response_code(419);
+        echo json_encode(['error' => 'Сессия устарела. Обновите страницу и повторите действие.']);
+        exit;
+    }
+}
+
+/**
  * Защита от несанкционированного доступа
  */
 function requireLogin() {
@@ -141,7 +174,7 @@ function getInitials($fullName) {
  * Генерация случайного номера билета
  */
 function generateTicketNumber() {
-    return 'R' . str_pad(rand(0, 99999), 5, '0', STR_PAD_LEFT);
+    return 'R' . str_pad((string) random_int(0, 99999), 5, '0', STR_PAD_LEFT);
 }
 
 /**

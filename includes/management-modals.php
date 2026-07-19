@@ -1,8 +1,8 @@
 <!-- Модальное окно: Выдача книги -->
-<div id="issueModal" class="modal">
+<div id="issueModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="issueModalTitle">
     <div class="modal-content">
-        <span class="modal-close" onclick="closeModal('issueModal')">&times;</span>
-        <h2>📋 Выдать книгу: <span id="issueReaderName"></span></h2>
+        <button type="button" class="modal-close" onclick="closeModal('issueModal')" aria-label="Закрыть окно">&times;</button>
+        <h2 id="issueModalTitle">📋 Выдать книгу: <span id="issueReaderName"></span></h2>
         <p class="subtitle">Выберите книгу из доступных для выдачи</p>
 
         <div id="availableBooksGrid" class="books-grid-small">
@@ -14,9 +14,9 @@
 </div>
 
 <!-- Модальное окно: Продление срока -->
-<div id="extendModal" class="modal">
+<div id="extendModal" class="modal" role="dialog" aria-modal="true" aria-label="Продлить срок выдачи">
     <div class="modal-content">
-        <span class="modal-close" onclick="closeModal('extendModal')">&times;</span>
+        <button type="button" class="modal-close" onclick="closeModal('extendModal')" aria-label="Закрыть окно">&times;</button>
         <h2>⏰ Продлить срок</h2>
         <p class="subtitle">Продление срока возврата для <span id="extendReaderName"></span></p>
 
@@ -53,9 +53,9 @@
 </div>
 
 <!-- Модальное окно: Принятие книги -->
-<div id="returnModal" class="modal">
+<div id="returnModal" class="modal" role="dialog" aria-modal="true" aria-label="Принять книгу">
     <div class="modal-content">
-        <span class="modal-close" onclick="closeModal('returnModal')">&times;</span>
+        <button type="button" class="modal-close" onclick="closeModal('returnModal')" aria-label="Закрыть окно">&times;</button>
         <h2>✅ Принять книгу</h2>
         <p class="subtitle">Подтвердите возврат книги от <span id="returnReaderName"></span></p>
 

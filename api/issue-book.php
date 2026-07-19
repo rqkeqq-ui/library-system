@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+requireCsrfToken();
+
 $bookId = intval($_POST['book_id'] ?? 0);
 $readerId = intval($_POST['reader_id'] ?? 0);
 $requestId = intval($_POST['request_id'] ?? 0);

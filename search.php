@@ -92,7 +92,7 @@ include 'includes/header.php';
         <?php else: ?>
             <div class="books-grid">
                 <?php foreach ($results as $book): ?>
-                    <div class="book-card" onclick="openBookModal(<?= $book['id'] ?>)">
+                    <button type="button" class="book-card" onclick="openBookModal(<?= (int) $book['id'] ?>)" aria-haspopup="dialog">
                         <div class="book-cover">
                             <div class="book-cover-placeholder"><?= getBookIcon($book['genre']) ?></div>
                         </div>
@@ -104,7 +104,7 @@ include 'includes/header.php';
                                 <?= $book['status'] === BOOK_STATUS_AVAILABLE ? 'Доступна' : 'Выдана' ?>
                             </span>
                         </div>
-                    </div>
+                    </button>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
@@ -112,13 +112,13 @@ include 'includes/header.php';
 <?php endif; ?>
 
 <!-- Модальное окно информации о книге -->
-<div id="bookModal" class="modal">
+<div id="bookModal" class="modal" role="dialog" aria-modal="true" aria-label="Информация о книге">
     <div class="modal-content">
-        <span class="modal-close" onclick="closeModal('bookModal')">&times;</span>
+        <button type="button" class="modal-close" onclick="closeModal('bookModal')" aria-label="Закрыть окно">&times;</button>
         <div id="bookModalContent"></div>
     </div>
 </div>
 
-<script src="js/books.js"></script>
+<script src="js/books.js?v=20260719"></script>
 
 <?php include 'includes/footer.php'; ?>
