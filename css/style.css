@@ -58,6 +58,28 @@ body {
     background-color: var(--bg-light);
 }
 
+.skip-link {
+    position: fixed;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    z-index: 10001;
+    transform: translateY(-200%);
+    background: var(--color-primary-dark);
+    color: #fff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
@@ -403,11 +425,19 @@ p { margin-bottom: var(--spacing-md); }
     padding: var(--spacing-md);
     cursor: pointer;
     transition: all 0.2s;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    width: 100%;
 }
 
 .book-card:hover {
     box-shadow: var(--shadow-lg);
     transform: translateY(-2px);
+}
+
+.book-card:focus-visible {
+    border-color: var(--color-primary);
 }
 
 .book-cover {
@@ -467,6 +497,23 @@ p { margin-bottom: var(--spacing-md); }
 .search-input:focus {
     outline: none;
     border-color: var(--color-primary);
+}
+
+.modal-close {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 /* ===== РАСШИРЕННЫЙ ПОИСК ===== */

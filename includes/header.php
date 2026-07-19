@@ -17,10 +17,12 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<?= escape(csrfToken()) ?>">
     <title><?= PAGE_TITLE ?> - <?= SITE_NAME ?></title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Перейти к содержимому</a>
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -102,5 +104,5 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
         </div>
     <?php endif; ?>
 
-    <main class="main-content">
+    <main id="main-content" class="main-content" tabindex="-1">
         <div class="container">

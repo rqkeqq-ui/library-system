@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+requireCsrfToken();
+
 $currentUser = getCurrentUser();
 
 if ($currentUser['role'] !== ROLE_READER) {

@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+requireCsrfToken();
+
 $title = trim($_POST['title'] ?? '');
 $author = trim($_POST['author'] ?? '');
 $genre = trim($_POST['genre'] ?? '');

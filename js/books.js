@@ -64,10 +64,13 @@ async function requestBook(bookId) {
     try {
         const formData = new FormData();
         formData.append('book_id', bookId);
+        appendCsrfToken(formData);
 
         const response = await fetch('api/request-book.php', {
             method: 'POST',
-            body: formData
+            headers: csrfHeaders(),
+            body: formData,
+            credentials: 'same-origin'
         });
 
         const data = await response.json();
@@ -101,11 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             const formData = new FormData(addBookForm);
+            appendCsrfToken(formData);
 
             try {
                 const response = await fetch('api/add-book.php', {
                     method: 'POST',
-                    body: formData
+                    headers: csrfHeaders(),
+                    body: formData,
+                    credentials: 'same-origin'
                 });
 
                 const data = await response.json();

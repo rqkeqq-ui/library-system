@@ -12,54 +12,57 @@ $errors = [];
 $success = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $full_name = trim($_POST['full_name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-    $confirm_password = $_POST['confirm_password'] ?? '';
+    if (!isCsrfTokenValid($_POST['csrf_token'] ?? null)) {
+        $errors[] = 'Сессия формы устарела. Обновите страницу и повторите регистрацию.';
+    } else {
+        $full_name = trim($_POST['full_name'] ?? '');
+        $email = trim($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+        $confirm_password = $_POST['confirm_password'] ?? '';
 
-    // Валидация
-    if (empty($full_name)) {
-        $errors[] = 'Введите полное имя';
-    }
-
-    if (empty($email)) {
-        $errors[] = 'Введите email';
-    } elseif (!validateEmail($email)) {
-        $errors[] = 'Неверный формат email';
-    }
-
-    if (empty($password)) {
-        $errors[] = 'Введите пароль';
-    } elseif (strlen($password) < 6) {
-        $errors[] = 'Пароль должен содержать минимум 6 символов';
-    }
-
-    if ($password !== $confirm_password) {
-        $errors[] = 'Пароли не совпадают';
-    }
-
-    // Проверка существования email
-    if (empty($errors)) {
-        $db = getDB();
-        $existingUser = $db->fetchOne("SELECT id FROM users WHERE email = ?", [$email]);
-        if ($existingUser) {
-            $errors[] = 'Пользователь с таким email уже существует';
+        if (empty($full_name)) {
+            $errors[] = 'Введите полное имя';
+        } elseif (mb_strlen($full_name) > 255) {
+            $errors[] = 'Полное имя не должно превышать 255 символов';
         }
-    }
 
-    // Регистрация
-    if (empty($errors)) {
-        $password_hash = hashPassword($password);
-        $ticket_number = generateTicketNumber();
+        if (empty($email)) {
+            $errors[] = 'Введите email';
+        } elseif (!validateEmail($email)) {
+            $errors[] = 'Неверный формат email';
+        }
 
-        $sql = "INSERT INTO users (email, password_hash, role, full_name, ticket_number)
-                VALUES (?, ?, ?, ?, ?)";
+        if (empty($password)) {
+            $errors[] = 'Введите пароль';
+        } elseif (strlen($password) < 8) {
+            $errors[] = 'Пароль должен содержать минимум 8 символов';
+        }
 
-        if ($db->execute($sql, [$email, $password_hash, ROLE_READER, $full_name, $ticket_number])) {
-            $success = true;
-            setFlashMessage('success', 'Регистрация успешна! Теперь вы можете войти.');
-        } else {
-            $errors[] = 'Ошибка при регистрации. Попробуйте позже.';
+        if ($password !== $confirm_password) {
+            $errors[] = 'Пароли не совпадают';
+        }
+
+        if (empty($errors)) {
+            $db = getDB();
+            $existingUser = $db->fetchOne("SELECT id FROM users WHERE email = ?", [$email]);
+            if ($existingUser) {
+                $errors[] = 'Пользователь с таким email уже существует';
+            }
+        }
+
+        if (empty($errors)) {
+            $password_hash = hashPassword($password);
+            $ticket_number = generateTicketNumber();
+
+            $sql = "INSERT INTO users (email, password_hash, role, full_name, ticket_number)
+                    VALUES (?, ?, ?, ?, ?)";
+
+            if ($db->execute($sql, [$email, $password_hash, ROLE_READER, $full_name, $ticket_number])) {
+                $success = true;
+                setFlashMessage('success', 'Регистрация успешна! Теперь вы можете войти.');
+            } else {
+                $errors[] = 'Ошибка при регистрации. Попробуйте позже.';
+            }
         }
     }
 }
@@ -99,7 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <?php if (!$success): ?>
-                <form method="POST" action="register.php" class="auth-form">
+            <form method="POST" action="register.php" class="auth-form">
+                <input type="hidden" name="csrf_token" value="<?= escape(csrfToken()) ?>">
                     <div class="form-group">
                         <label for="full_name">Полное имя</label>
                         <input
@@ -135,9 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             placeholder="••••••••"
                             required
                             autocomplete="new-password"
-                            minlength="6"
+                            minlength="8"
                         >
-                        <small>Минимум 6 символов</small>
+                        <small>Минимум 8 символов</small>
                     </div>
 
                     <div class="form-group">
@@ -149,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             placeholder="••••••••"
                             required
                             autocomplete="new-password"
-                            minlength="6"
+                            minlength="8"
                         >
                     </div>
 

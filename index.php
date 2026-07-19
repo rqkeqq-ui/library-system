@@ -31,7 +31,7 @@ include 'includes/header.php';
 
 <!-- Быстрый поиск -->
 <div class="quick-search">
-    <form action="index.php" method="GET" class="search-form">
+    <form action="index.php" method="GET" class="search-form" role="search">
         <input
             type="search"
             name="q"
@@ -39,6 +39,7 @@ include 'includes/header.php';
             value="<?= escape($quickSearch) ?>"
             class="search-input"
         >
+        <button type="submit" class="btn btn-primary">Найти</button>
         <?php if ($quickSearch): ?>
             <a href="index.php" class="btn btn-secondary">Сбросить</a>
         <?php endif; ?>
@@ -53,7 +54,7 @@ include 'includes/header.php';
         </div>
     <?php else: ?>
         <?php foreach ($books as $book): ?>
-            <div class="book-card" onclick="openBookModal(<?= $book['id'] ?>)">
+            <button type="button" class="book-card" onclick="openBookModal(<?= (int) $book['id'] ?>)" aria-haspopup="dialog">
                 <div class="book-cover">
                     <?php if ($book['cover_image']): ?>
                         <img src="<?= escape($book['cover_image']) ?>" alt="<?= escape($book['title']) ?>">
@@ -71,15 +72,15 @@ include 'includes/header.php';
                         <?= $book['status'] === BOOK_STATUS_AVAILABLE ? 'Доступна' : 'Выдана' ?>
                     </span>
                 </div>
-            </div>
+            </button>
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
 
 <!-- Модальное окно: Информация о книге -->
-<div id="bookModal" class="modal">
+<div id="bookModal" class="modal" role="dialog" aria-modal="true" aria-label="Информация о книге">
     <div class="modal-content">
-        <span class="modal-close" onclick="closeModal('bookModal')">&times;</span>
+        <button type="button" class="modal-close" onclick="closeModal('bookModal')" aria-label="Закрыть окно">&times;</button>
         <div id="bookModalContent">
             <!-- Заполняется через JavaScript -->
         </div>
@@ -88,11 +89,12 @@ include 'includes/header.php';
 
 <!-- Модальное окно: Добавление книги (только для админа) -->
 <?php if (isAdmin()): ?>
-<div id="addBookModal" class="modal">
+<div id="addBookModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="addBookModalTitle">
     <div class="modal-content">
-        <span class="modal-close" onclick="closeModal('addBookModal')">&times;</span>
-        <h2>➕ Добавить новую книгу</h2>
+        <button type="button" class="modal-close" onclick="closeModal('addBookModal')" aria-label="Закрыть окно">&times;</button>
+        <h2 id="addBookModalTitle">➕ Добавить новую книгу</h2>
         <form id="addBookForm" method="POST" action="api/add-book.php" class="modal-form">
+            <input type="hidden" name="csrf_token" value="<?= escape(csrfToken()) ?>">
             <div class="form-group">
                 <label for="title">Название книги *</label>
                 <input type="text" id="title" name="title" required>
@@ -131,6 +133,6 @@ include 'includes/header.php';
 </div>
 <?php endif; ?>
 
-<script src="js/books.js"></script>
+<script src="js/books.js?v=20260719"></script>
 
 <?php include 'includes/footer.php'; ?>

@@ -2,6 +2,22 @@
  * Основные JavaScript функции
  */
 
+function getCsrfToken() {
+    return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+}
+
+function appendCsrfToken(formData) {
+    const token = getCsrfToken();
+    if (token) {
+        formData.append('csrf_token', token);
+    }
+}
+
+function csrfHeaders() {
+    const token = getCsrfToken();
+    return token ? { 'X-CSRF-Token': token } : {};
+}
+
 // Открыть модальное окно
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
@@ -43,6 +59,8 @@ document.addEventListener('keydown', (e) => {
 function showNotification(message, type = 'success') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
+    notification.setAttribute('role', 'status');
+    notification.setAttribute('aria-live', 'polite');
     notification.textContent = message;
     notification.style.cssText = `
         position: fixed;
