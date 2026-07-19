@@ -12,6 +12,10 @@
 
 # Library Management System
 
+## Live demo
+
+[Открыть сайт](https://library-system-rqke.freehosting.dev)
+
 Веб-сервис для управления библиотекой, каталогом книг и бронированиями.
 
 ## Features
