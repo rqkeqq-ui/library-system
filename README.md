@@ -47,15 +47,15 @@
 
 ## Screenshots
 
-| Вход | Каталог |
+| Вход | Регистрация |
 | --- | --- |
-| ![Страница входа](docs/screenshots/login.png) | ![Каталог книг](docs/screenshots/catalog.png) |
-| Карточка и бронирование | Личный кабинет |
-| ![Карточка книги](docs/screenshots/book-card.png) | ![Мои книги](docs/screenshots/my-books.png) |
-| Заявки читателя | Админ-панель |
-| ![Мои заявки](docs/screenshots/booking.png) | ![Управление заявками](docs/screenshots/admin-panel.png) |
-| Управление книгами | Регистрация |
-| ![Добавление книги администратором](docs/screenshots/manage-books.png) | ![Регистрация читателя](docs/screenshots/register.png) |
+| ![Страница входа](docs/screenshots/login.png) | ![Регистрация читателя](docs/screenshots/register.png) |
+| Каталог | Карточка и бронирование |
+| ![Каталог книг](docs/screenshots/catalog.png) | ![Карточка книги](docs/screenshots/book-card.png) |
+| Личный кабинет | Заявки читателя |
+| ![Мои книги](docs/screenshots/my-books.png) | ![Мои заявки](docs/screenshots/booking.png) |
+| Админ-панель | Управление книгами |
+| ![Управление заявками](docs/screenshots/admin-panel.png) | ![Добавление книги администратором](docs/screenshots/manage-books.png) |
 
 ## Project status
 
